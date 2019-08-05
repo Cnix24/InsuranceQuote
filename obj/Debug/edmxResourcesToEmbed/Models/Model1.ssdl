@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="QuotePrices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="BasePrice" Type="int" />
+    <Property Name="AgeAdder" Type="int" />
+    <Property Name="YearAdder" Type="int" />
+    <Property Name="CarAdder" Type="int" />
+    <Property Name="TicketAdder" Type="int" />
+    <Property Name="DUIPrice" Type="float" />
+    <Property Name="CoveragePrice" Type="float" />
+    <Property Name="TotalPrice" Type="float" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="CarYear" Type="int" />
+    <Property Name="CarMake" Type="varchar" MaxLength="25" />
+    <Property Name="CarModel" Type="varchar" MaxLength="50" />
+    <Property Name="DUI" Type="bit" />
+    <Property Name="SpeedingTicketCount" Type="int" />
+    <Property Name="Coverage" Type="bit" />
+  </EntityType>
+  <Association Name="FK__QuotePrices__Id__3B75D760">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+    <End Role="QuotePrices" Type="Self.QuotePrices" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuotePrices">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuranceDetails_QuoteDetails">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+    <End Role="UserDetails1" Type="Self.UserDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetails1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+    <End Role="UserDetails1" Type="Self.UserDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetails1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsuranceDetailsModelStoreContainer">
+    <EntitySet Name="QuotePrices" EntityType="Self.QuotePrices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__QuotePrices__Id__3B75D760" Association="Self.FK__QuotePrices__Id__3B75D760">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="QuotePrices" EntitySet="QuotePrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuranceDetails_QuoteDetails" Association="Self.FK_InsuranceDetails_QuoteDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserDetails1" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_UserDetails" Association="Self.FK_UserDetails_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserDetails1" EntitySet="UserDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

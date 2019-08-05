@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InsuranceDetailsModelStoreContainer" CdmEntityContainer="InsuranceDetailsEntities">
+    <EntitySetMapping Name="QuotePrices">
+      <EntityTypeMapping TypeName="InsuranceDetailsModel.QuotePrice">
+        <MappingFragment StoreEntitySet="QuotePrices">
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="CoveragePrice" ColumnName="CoveragePrice" />
+          <ScalarProperty Name="DUIPrice" ColumnName="DUIPrice" />
+          <ScalarProperty Name="TicketAdder" ColumnName="TicketAdder" />
+          <ScalarProperty Name="CarAdder" ColumnName="CarAdder" />
+          <ScalarProperty Name="YearAdder" ColumnName="YearAdder" />
+          <ScalarProperty Name="AgeAdder" ColumnName="AgeAdder" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

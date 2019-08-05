@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="QuotePrice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="BasePrice" Type="Int32" />
+    <Property Name="AgeAdder" Type="Int32" />
+    <Property Name="YearAdder" Type="Int32" />
+    <Property Name="CarAdder" Type="Int32" />
+    <Property Name="TicketAdder" Type="Int32" />
+    <Property Name="DUIPrice" Type="Double" />
+    <Property Name="CoveragePrice" Type="Double" />
+    <Property Name="TotalPrice" Type="Double" />
+    <NavigationProperty Name="UserDetail" Relationship="Self.FK__QuotePrices__Id__3B75D760" FromRole="QuotePrices" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="CarYear" Type="Int32" />
+    <Property Name="CarMake" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="CarModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DUI" Type="Boolean" />
+    <Property Name="SpeedingTicketCount" Type="Int32" />
+    <Property Name="Coverage" Type="Boolean" />
+    <NavigationProperty Name="QuotePrice" Relationship="Self.FK__QuotePrices__Id__3B75D760" FromRole="UserDetails" ToRole="QuotePrices" />
+    <NavigationProperty Name="UserDetails1" Relationship="Self.FK_InsuranceDetails_QuoteDetails" FromRole="UserDetails" ToRole="UserDetails1" />
+    <NavigationProperty Name="UserDetail1" Relationship="Self.FK_InsuranceDetails_QuoteDetails" FromRole="UserDetails1" ToRole="UserDetails" />
+    <NavigationProperty Name="UserDetails11" Relationship="Self.FK_UserDetails_UserDetails" FromRole="UserDetails" ToRole="UserDetails1" />
+    <NavigationProperty Name="UserDetail2" Relationship="Self.FK_UserDetails_UserDetails" FromRole="UserDetails1" ToRole="UserDetails" />
+  </EntityType>
+  <Association Name="FK__QuotePrices__Id__3B75D760">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="QuotePrices" Type="Self.QuotePrice" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuotePrices">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuranceDetails_QuoteDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="UserDetails1" Type="Self.UserDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetails1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+    <End Role="UserDetails1" Type="Self.UserDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetails1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsuranceDetailsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="QuotePrices" EntityType="Self.QuotePrice" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <AssociationSet Name="FK__QuotePrices__Id__3B75D760" Association="Self.FK__QuotePrices__Id__3B75D760">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="QuotePrices" EntitySet="QuotePrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuranceDetails_QuoteDetails" Association="Self.FK_InsuranceDetails_QuoteDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserDetails1" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_UserDetails" Association="Self.FK_UserDetails_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserDetails1" EntitySet="UserDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

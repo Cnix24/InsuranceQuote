@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InsuranceDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="QuotePrices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BasePrice" Type="int" />
+          <Property Name="AgeAdder" Type="int" />
+          <Property Name="YearAdder" Type="int" />
+          <Property Name="CarAdder" Type="int" />
+          <Property Name="TicketAdder" Type="int" />
+          <Property Name="DUIPrice" Type="float" />
+          <Property Name="CoveragePrice" Type="float" />
+          <Property Name="TotalPrice" Type="float" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="CarYear" Type="int" />
+          <Property Name="CarMake" Type="varchar" MaxLength="25" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" />
+          <Property Name="DUI" Type="bit" />
+          <Property Name="SpeedingTicketCount" Type="int" />
+          <Property Name="Coverage" Type="bit" />
+        </EntityType>
+        <Association Name="FK__QuotePrices__Id__3B75D760">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="QuotePrices" Type="Self.QuotePrices" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotePrices">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsuranceDetails_QuoteDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserDetails1" Type="Self.UserDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserDetails1" Type="Self.UserDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InsuranceDetailsModelStoreContainer">
+          <EntitySet Name="QuotePrices" EntityType="Self.QuotePrices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__QuotePrices__Id__3B75D760" Association="Self.FK__QuotePrices__Id__3B75D760">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="QuotePrices" EntitySet="QuotePrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceDetails_QuoteDetails" Association="Self.FK_InsuranceDetails_QuoteDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserDetails1" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_UserDetails" Association="Self.FK_UserDetails_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserDetails1" EntitySet="UserDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InsuranceDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="QuotePrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BasePrice" Type="Int32" />
+          <Property Name="AgeAdder" Type="Int32" />
+          <Property Name="YearAdder" Type="Int32" />
+          <Property Name="CarAdder" Type="Int32" />
+          <Property Name="TicketAdder" Type="Int32" />
+          <Property Name="DUIPrice" Type="Double" />
+          <Property Name="CoveragePrice" Type="Double" />
+          <Property Name="TotalPrice" Type="Double" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK__QuotePrices__Id__3B75D760" FromRole="QuotePrices" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="CarYear" Type="Int32" />
+          <Property Name="CarMake" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DUI" Type="Boolean" />
+          <Property Name="SpeedingTicketCount" Type="Int32" />
+          <Property Name="Coverage" Type="Boolean" />
+          <NavigationProperty Name="QuotePrice" Relationship="Self.FK__QuotePrices__Id__3B75D760" FromRole="UserDetails" ToRole="QuotePrices" />
+          <NavigationProperty Name="UserDetails1" Relationship="Self.FK_InsuranceDetails_QuoteDetails" FromRole="UserDetails" ToRole="UserDetails1" />
+          <NavigationProperty Name="UserDetail1" Relationship="Self.FK_InsuranceDetails_QuoteDetails" FromRole="UserDetails1" ToRole="UserDetails" />
+          <NavigationProperty Name="UserDetails11" Relationship="Self.FK_UserDetails_UserDetails" FromRole="UserDetails" ToRole="UserDetails1" />
+          <NavigationProperty Name="UserDetail2" Relationship="Self.FK_UserDetails_UserDetails" FromRole="UserDetails1" ToRole="UserDetails" />
+        </EntityType>
+        <Association Name="FK__QuotePrices__Id__3B75D760">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="QuotePrices" Type="Self.QuotePrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotePrices">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsuranceDetails_QuoteDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="UserDetails1" Type="Self.UserDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="UserDetails1" Type="Self.UserDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InsuranceDetailsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="QuotePrices" EntityType="Self.QuotePrice" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK__QuotePrices__Id__3B75D760" Association="Self.FK__QuotePrices__Id__3B75D760">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="QuotePrices" EntitySet="QuotePrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceDetails_QuoteDetails" Association="Self.FK_InsuranceDetails_QuoteDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserDetails1" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_UserDetails" Association="Self.FK_UserDetails_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserDetails1" EntitySet="UserDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InsuranceDetailsModelStoreContainer" CdmEntityContainer="InsuranceDetailsEntities">
+          <EntitySetMapping Name="QuotePrices">
+            <EntityTypeMapping TypeName="InsuranceDetailsModel.QuotePrice">
+              <MappingFragment StoreEntitySet="QuotePrices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="AgeAdder" ColumnName="AgeAdder" />
+                <ScalarProperty Name="YearAdder" ColumnName="YearAdder" />
+                <ScalarProperty Name="CarAdder" ColumnName="CarAdder" />
+                <ScalarProperty Name="TicketAdder" ColumnName="TicketAdder" />
+                <ScalarProperty Name="DUIPrice" ColumnName="DUIPrice" />
+                <ScalarProperty Name="CoveragePrice" ColumnName="CoveragePrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="InsuranceDetailsModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="DUI" ColumnName="DUI" />
+                <ScalarProperty Name="SpeedingTicketCount" ColumnName="SpeedingTicketCount" />
+                <ScalarProperty Name="Coverage" ColumnName="Coverage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

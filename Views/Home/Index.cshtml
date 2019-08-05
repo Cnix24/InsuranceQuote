@@ -1,0 +1,58 @@
+﻿<div class="row m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto my-4 shadow bg-warning">
+        <div class="card-header bg-warning text-center">
+            <h2>Calvin's Car Insurance Inc.</h2>
+            <h6 class="m-0">Get your car insurance quote instantly!</h6>
+        </div>
+        <div class="card-body">  
+            @using (Html.BeginForm("Quoter", "Home", FormMethod.Post)) //handy way to make a form, so you can include some csharp functionality for db etc
+            {
+                <div class="row no-gutters">
+                    <div class="form-group col-md-12">
+                        <input name="firstName" type="text" class="form-control" placeholder="First Name" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="lastName" type="text" class="form-control" placeholder="Last Name" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="emailAddress" type="email" class="form-control" placeholder="Email Address" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="dateOfBirth" type="date" class="form-control" placeholder="Date of Birth (mm/dd/yyyy)" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="carYear" type="number" class="form-control" min="1955" max=@DateTime.Now.Year placeholder="Car Year" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="carMake" type="text" class="form-control" placeholder="Car Make" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="carModel" type="text" class="form-control" placeholder="Car Model" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="speedingTicketCount" type="number" min="0" class="form-control" placeholder="Speeding tickets on record?" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <p><strong>Is there a DUI on your record?</strong></p>
+                        <div>
+                            <input type="radio" id="duiNo" name="duiCheck" value="false" checked>
+                            <label for="duiNo">No</label>
+                            <input type="radio" id="duiYes" name="duiCheck" value="true">
+                            <label for="duiYes">Yes</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <p><strong>Would you like full coverage or liability?</strong></p>
+                        <div>
+                            <input type="radio" id="fullCoverage" name="optionCheck" value="false" checked>
+                            <label for="fullCoverage">Full Coverage</label>
+                            <input type="radio" id="liabilityOnly" name="optionCheck" value="true">
+                            <label for="liabilityOnly">Liability</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block shadow btn-dark">Submit</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

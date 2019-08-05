@@ -1,0 +1,27 @@
+﻿@using InsuranceQuote.ViewModels;
+@using InsuranceQuote.Models;
+@using InsuranceQuote.Controllers;
+
+@model List<QuoteVm>
+@*@{
+    var db = new InsuranceDetailsEntities();
+    var userPrice = db.QuotePrices;}*@
+
+
+<div class="row mx-autho my-auto m-3 text-center">
+    <div class="card col-sm-12 col-md-10 col-lg-8 mx-auto my-4 shadow bg-warning">
+        <div class="card-header bg-light">
+            <h2>Admin Page</h2><br />
+            <h6 class="mb-3">All quotes</h6>
+        </div>
+        @foreach (var quote in Model)
+        {
+            <input type="hidden" name="Id" value="@quote.Id" />
+            <div class="card-header bg-warning text-center">
+                <h4>Name: @quote.FirstName @quote.LastName</h4><br />
+                <h6>Email: @quote.EmailAddress</h6>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@using InsuranceQuote.ViewModels
+@using InsuranceQuote.Models
+@using InsuranceQuote.Controllers;
+
+@{var linkId = @ViewBag.LinkableId;}
+@{
+    var db = new InsuranceDetailsEntities();
+    var userInfo = db.UserDetails.Find(linkId);
+    var userPrice = db.QuotePrices.Find(linkId);}
+
+
+<div class="row m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto my-4 shadow bg-warning">
+        <div class="card-header bg-warning text-center">
+            <h2>Your Quote</h2>
+            <h6 class="m-0">See! Didn't I tell you it was instant?</h6>
+        </div>
+        <div class="card-body">
+            <div class="row no-gutters text-center">
+                <div class="card col-md-12 bg-">
+                    <p>Account Info: @userInfo.FirstName @userInfo.LastName <br /> Email Address: @userInfo.EmailAddress</p>
+                </div>
+                <div class="card col-md-12">
+                    <p>Car Info:<br />@userInfo.CarYear<br />@userInfo.CarModel<br />@userInfo.CarMake
+                </div>
+                <div class="card col-md-12">
+                    <h4>Pricing:</h4>
+                    <p>Base pricing: $@userPrice.BasePrice<br />Age adjustment: $@userPrice.AgeAdder<br />Car adjustments: $@userPrice.CarAdder<br />Ticket adjustment: $@userPrice.TicketAdder<br />DUI adjustment: $@userPrice.DUIPrice<br />Coverage choice adjustment: $@userPrice.CoveragePrice</p>
+                    <h4>Final Price:</h4>
+                    <h5>$@userPrice.TotalPrice</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

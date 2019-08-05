@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="QuotePrices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="BasePrice" Type="int" />
+    <Property Name="AgeAdder" Type="int" />
+    <Property Name="YearAdder" Type="int" />
+    <Property Name="CarAdder" Type="int" />
+    <Property Name="TicketAdder" Type="int" />
+    <Property Name="DUIPrice" Type="float" />
+    <Property Name="CoveragePrice" Type="float" />
+    <Property Name="TotalPrice" Type="float" />
+  </EntityType>
+  <EntityContainer Name="InsuranceDetailsModelStoreContainer">
+    <EntitySet Name="QuotePrices" EntityType="Self.QuotePrices" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
